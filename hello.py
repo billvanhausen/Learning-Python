@@ -1,3 +1,4 @@
+'''
 # import tkinter as tk
 from tkinter import *
 import tkinter.messagebox
@@ -8,6 +9,7 @@ from tkinter.filedialog import *
 root = Tk()
 footer_row = Frame(root, width=600, height=50)
 footer_row.grid(row=3, columnspan=3, sticky="s")
+circle_area_form = Tk()
 
 # Global variables
 count_result = 0
@@ -25,6 +27,7 @@ def file_open():
     tkinter.messagebox.showinfo('File Contents', file_contents.read())
 
 def file_exit():
+    circle_area_form.destroy()
     root.destroy()
 
 def about_message():
@@ -71,6 +74,12 @@ def toggle_languages():
     else:
         footer_row.grid_remove()
 
+def show_circle_area_form():
+    circle_area_form.deiconify()
+
+def hide_windows():    
+    circle_area_form.withdraw()
+
 
 
 root.title('Learning Python')
@@ -88,27 +97,37 @@ footer_row.grid_columnconfigure(1,weight=1,uniform='footer_group')
 footer_row.grid_columnconfigure(2,weight=1,uniform='footer_group')
 footer_row.grid_columnconfigure(3,weight=1,uniform='footer_group')
 
+circle_area_form.title('Calculate the area of a circle')
+circle_area_form.geometry('300x200')
+hide_windows()
+
+circle_area_form.protocol("WM_DELETE_WINDOW", hide_windows)
+root.protocol("WM_DELETE_WINDOW", file_exit)
+
 # Menu System
 mainMenu = Menu()
 file_items = Menu(tearoff=False)
+edit_items = Menu(tearoff=False)
 run_items = Menu(tearoff=False)
 help_items = Menu(tearoff=False)
 
-mainMenu.add_cascade(label='File',menu=file_items)
-mainMenu.add_cascade(label='Edit')
-mainMenu.add_cascade(label='Run',menu=run_items)
-mainMenu.add_cascade(label='Help',menu=help_items)
+mainMenu.add_cascade(label='File', menu=file_items)
+mainMenu.add_cascade(label='Edit', menu=edit_items)
+mainMenu.add_cascade(label='Run', menu=run_items)
+mainMenu.add_cascade(label='Help', menu=help_items)
 
 file_items.add_command(label='New')
-file_items.add_command(label='Open',command=file_open)
+file_items.add_command(label='Open', command=file_open)
 file_items.add_command(label='Save')
-file_items.add_command(label='Exit',command=file_exit)
+file_items.add_command(label='Exit', command=file_exit)
 
-run_items.add_command(label='Digit Counter',command=digit_counter)
-run_items.add_command(label='Choose Color',command=color_chooser)
-run_items.add_checkbutton(label='Show Languages',command=toggle_languages)
+edit_items.add_command(label='Calculate Circle Area', command=show_circle_area_form)
 
-help_items.add_command(label='About',command=about_message)
+run_items.add_command(label='Digit Counter', command=digit_counter)
+run_items.add_command(label='Choose Color', command=color_chooser)
+run_items.add_checkbutton(label='Show Languages', command=toggle_languages)
+
+help_items.add_command(label='About', command=about_message)
 
 # Content
 # digit_label = Label(root, text=f'Let\'s Learn {language_list[language_choice.get()]}',font=200).grid(row=0, column=1)
@@ -122,3 +141,4 @@ Radiobutton(footer_row, text=language_list[3], variable=language_choice, value=3
 root.config(menu=mainMenu)
 toggle_languages()
 root.mainloop()
+,,,
