@@ -1,5 +1,6 @@
 # project_root/Views/index.py
 import tkinter as tk
+import Views.footer as footer
 
 class Index(tk.Frame):
     def __init__(self, parent):
@@ -8,11 +9,12 @@ class Index(tk.Frame):
         # create widgets
         # label
         self.message_label=tk.Label(self, text='Let\'s Learn Python')
-        # self.message_label.grid(row=1, column=0)  
-        self.message_label.pack()  
-
+        self.message_label.pack(anchor='n')  
         # set the controller
         self.controller = None
+
+    def set_message(self, msg):  
+        self.message_label.config(text=msg)
 
     def set_controller(self, controller):
         self.controller = controller

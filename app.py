@@ -1,6 +1,7 @@
 # project_root/app.py
 import tkinter as tk
 from Views.index import Index
+from Views.footer import Footer
 import Modules.main_menu
 
 class App(tk.Tk):
@@ -13,7 +14,10 @@ class App(tk.Tk):
         # Create a model
         # Create a view and place it on the root window
         view = Index(self)
-        view.grid(row=0, column=0, padx=10, pady=10)
+        view.pack(anchor='n')
+
+        language = Footer(self)
+        language.pack(anchor='s')
         # Create a controller
         # Set the controller to view
 
@@ -23,6 +27,8 @@ class App(tk.Tk):
         help_menu = tk.Menu(tearoff=0)
 
         file_menu.add_command(label='New')
+        file_menu.add_command(label='Open')
+        file_menu.add_command(label='Save')
         file_menu.add_separator()
         file_menu.add_command(label='Exit', command=self.destroy)
 
