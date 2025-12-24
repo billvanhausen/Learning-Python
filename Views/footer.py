@@ -1,4 +1,4 @@
-# project_root/Views/footer.py
+# project_root/views/footer.py
 import tkinter as tk
 
 class Footer(tk.Frame):

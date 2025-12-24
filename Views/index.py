@@ -1,6 +1,6 @@
-# project_root/Views/index.py
+# project_root/views/index.py
 import tkinter as tk
-import Views.footer as footer
+# import views.footer as footer
 
 class Index(tk.Frame):
     def __init__(self, parent):
